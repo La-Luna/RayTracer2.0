@@ -3,6 +3,7 @@
 #include "hitable.h"
 #include "ray.h"
 #include "vec3.h"
+#include"texture.h"
 #include <iostream>
 //class material;
 //struct hit_record{
@@ -47,18 +48,19 @@ public:
 
 class lambertian :public material{
 public:
-	lambertian(const vec3& a):albedo(a){}
-
+	lambertian(const color& a):albedo(make_shared<solid_color>(a)){}
+	lambertian(shared_ptr<texture> a) :albedo(a){};
 	virtual bool scatter( ray& r_in, hit_record& rec, vec3& attenuation,  ray& scattered)const{ 
 		vec3 target_s = rec.p + rec.normal + random_in_unit_sphere();
 		scattered = ray(rec.p, target_s - rec.p,r_in.time());
-		attenuation = albedo;
+		attenuation = albedo->value(rec.u,rec.v,rec.p);
 		return true;
 
 	};
 
 
-	vec3 albedo;
+	//vec3 albedo;
+	shared_ptr<texture> albedo;
 };
 
 class metal :public material{

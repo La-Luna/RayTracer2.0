@@ -28,8 +28,8 @@ color ray_color(ray& r,const hitable& world,int depth){
 }
 hitable_list random_scene() {
 	hitable_list world;
-
-	auto ground_material = make_shared<lambertian>(color(0.5, 0.5, 0.5));
+	auto checker = make_shared<lambertian>(color(0.2, 0.3, 0.1), color(0.9, 0.9, 0.9));
+	auto ground_material = make_shared<lambertian>(checker);
 	world.add(make_shared<sphere>(points3(0, -1000, 0), 1000, ground_material));
 
 	for (int a = -11; a < 11; a++) {

@@ -4,6 +4,14 @@
 #include "ray.h"
 #include "material.h"
 #include "vec3.h"
+#include"math.h"
+void get_sphere_uv(const vec3&p,double& u,double& v){
+	auto phi = atan2(p.e[2], p.e[0]);
+	auto theta = asin(p.e[1]);
+	u = 1 - (phi + pi) / (2 * pi);
+	v = 1 - (theta + pi / 2.0) / pi;
+}
+
 class sphere :public hitable{
 public:
 	sphere(){};
@@ -32,6 +40,7 @@ bool sphere::hit(const ray& r, float t_min, float t_max, hit_record& rec)const {
 			rec.p = r.point_at_parameter(temp);
 			vec3 outward_normal = (rec.p - center)/radius;
 			rec.set_face_normal(r, outward_normal);
+			get_sphere_uv((rec.p - center)/radius, rec.u, rec.v);
 			//rec.normal = outward_normal;
 			rec.mat_ptr = mat_ptr;
 			return true;
@@ -43,6 +52,7 @@ bool sphere::hit(const ray& r, float t_min, float t_max, hit_record& rec)const {
 			vec3 outward_normal = (rec.p - center) / radius;
 			//rec.normal = outward_normal;
 			rec.set_face_normal(r, outward_normal);
+			get_sphere_uv((rec.p - center) / radius, rec.u, rec.v);
 			rec.mat_ptr = mat_ptr;
 			return true;
 		}
