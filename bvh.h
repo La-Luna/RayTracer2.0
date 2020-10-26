@@ -39,7 +39,7 @@ public:
 
 bvh_node::bvh_node(std::vector<shared_ptr<hitable>>objects,size_t start,size_t end,double time0,double time1){
 	int axis = random_int(0, 2);
-	auto comparator = (axis == 0) ? box_x_compare :
+	auto mycomparator = (axis == 0) ? box_x_compare :
 						(axis == 1) ? box_y_compare :
 							box_z_compare;
 	size_t object_span = end-start;
@@ -47,7 +47,7 @@ bvh_node::bvh_node(std::vector<shared_ptr<hitable>>objects,size_t start,size_t e
 		left = right = objects[start];
 	}
 	else if (object_span == 2){
-		if (comparator(objects[start],objects[start + 1])){
+		if (mycomparator(objects[start], objects[start + 1])){
 			left = objects[start];
 			right = objects[start + 1];
 		}
@@ -57,7 +57,7 @@ bvh_node::bvh_node(std::vector<shared_ptr<hitable>>objects,size_t start,size_t e
 		}
 	}
 	else{
-		std::sort(objects.begin() + start, objects.begin() + end, comparator);
+		std::sort(objects.begin() + start, objects.begin() + end, mycomparator);
 		
 		auto mid = start + object_span / 2;
 
