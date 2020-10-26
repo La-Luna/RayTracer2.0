@@ -1,0 +1,53 @@
+﻿  Source.cpp
+D:\CPP\RayTracer\RayTracer\rtweekend.h(47,61): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+D:\CPP\RayTracer\RayTracer\rtweekend.h(47,44): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+D:\CPP\RayTracer\RayTracer\rtweekend.h(47,27): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+D:\CPP\RayTracer\RayTracer\rtweekend.h(50,77): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+D:\CPP\RayTracer\RayTracer\rtweekend.h(50,52): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+D:\CPP\RayTracer\RayTracer\rtweekend.h(50,27): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+D:\CPP\RayTracer\RayTracer\material.h(44,1): error C2664: “vec3 unit_vector(vec3 &)”: 无法将参数 1 从“vec3”转换为“vec3 &”
+D:\CPP\RayTracer\RayTracer\material.h(44,55): message : 非常量引用只能绑定到左值
+D:\CPP\RayTracer\RayTracer\vec3.h(47,13): message : 参见“unit_vector”的声明
+D:\CPP\RayTracer\RayTracer\hitable.h(7,18): error C2011: “hit_record”:“struct”类型重定义
+D:\CPP\RayTracer\RayTracer\material.h(8): message : 参见“hit_record”的声明
+D:\CPP\RayTracer\RayTracer\hitable_list.h(25,13): error C2079: “temp_rec”使用未定义的 struct“hit_record”
+D:\CPP\RayTracer\RayTracer\hitable_list.h(29,6): error C2664: “bool hitable::hit(const ray &,float,float,hit_record &) const”: 无法将参数 4 从“int”转换为“hit_record &”
+D:\CPP\RayTracer\RayTracer\hitable.h(27,15): message : 参见“hitable::hit”的声明
+D:\CPP\RayTracer\RayTracer\hitable_list.h(32,18): error C2679: 二进制“=”: 没有找到接受“int”类型的右操作数的运算符(或没有可接受的转换)
+D:\CPP\RayTracer\RayTracer\material.h(13,1): message : 可能是“hit_record &hit_record::operator =(hit_record &&)”
+D:\CPP\RayTracer\RayTracer\material.h(13,1): message : 或    “hit_record &hit_record::operator =(const hit_record &)”
+D:\CPP\RayTracer\RayTracer\hitable_list.h(32,18): message : 尝试匹配参数列表“(hit_record, int)”时
+D:\CPP\RayTracer\RayTracer\sphere.h(30,7): error C2027: 使用了未定义类型“hit_record”
+D:\CPP\RayTracer\RayTracer\material.h(8): message : 参见“hit_record”的声明
+D:\CPP\RayTracer\RayTracer\sphere.h(31,7): error C2027: 使用了未定义类型“hit_record”
+D:\CPP\RayTracer\RayTracer\material.h(8): message : 参见“hit_record”的声明
+D:\CPP\RayTracer\RayTracer\sphere.h(32,30): error C2027: 使用了未定义类型“hit_record”
+D:\CPP\RayTracer\RayTracer\material.h(8): message : 参见“hit_record”的声明
+D:\CPP\RayTracer\RayTracer\sphere.h(33,7): error C2027: 使用了未定义类型“hit_record”
+D:\CPP\RayTracer\RayTracer\material.h(8): message : 参见“hit_record”的声明
+D:\CPP\RayTracer\RayTracer\sphere.h(35,7): error C2027: 使用了未定义类型“hit_record”
+D:\CPP\RayTracer\RayTracer\material.h(8): message : 参见“hit_record”的声明
+D:\CPP\RayTracer\RayTracer\sphere.h(40,7): error C2027: 使用了未定义类型“hit_record”
+D:\CPP\RayTracer\RayTracer\material.h(8): message : 参见“hit_record”的声明
+D:\CPP\RayTracer\RayTracer\sphere.h(41,7): error C2027: 使用了未定义类型“hit_record”
+D:\CPP\RayTracer\RayTracer\material.h(8): message : 参见“hit_record”的声明
+D:\CPP\RayTracer\RayTracer\sphere.h(42,30): error C2027: 使用了未定义类型“hit_record”
+D:\CPP\RayTracer\RayTracer\material.h(8): message : 参见“hit_record”的声明
+D:\CPP\RayTracer\RayTracer\sphere.h(44,7): error C2027: 使用了未定义类型“hit_record”
+D:\CPP\RayTracer\RayTracer\material.h(8): message : 参见“hit_record”的声明
+D:\CPP\RayTracer\RayTracer\sphere.h(45,7): error C2027: 使用了未定义类型“hit_record”
+D:\CPP\RayTracer\RayTracer\material.h(8): message : 参见“hit_record”的声明
+D:\CPP\RayTracer\RayTracer\camera.h(8,1): warning C4305: “初始化”: 从“double”到“float”截断
+D:\CPP\RayTracer\RayTracer\color.h(10,27): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+D:\CPP\RayTracer\RayTracer\Source.cpp(9,13): error C2079: “rec”使用未定义的 struct“hit_record”
+D:\CPP\RayTracer\RayTracer\Source.cpp(11,5): error C2664: “bool hitable::hit(const ray &,float,float,hit_record &) const”: 无法将参数 4 从“int”转换为“hit_record &”
+D:\CPP\RayTracer\RayTracer\hitable.h(27,15): message : 参见“hitable::hit”的声明
+D:\CPP\RayTracer\RayTracer\Source.cpp(21,44): error C2664: “vec3 unit_vector(vec3 &)”: 无法将参数 1 从“vec3”转换为“vec3 &”
+D:\CPP\RayTracer\RayTracer\Source.cpp(21,42): message : 非常量引用只能绑定到左值
+D:\CPP\RayTracer\RayTracer\vec3.h(47,13): message : 参见“unit_vector”的声明
+D:\CPP\RayTracer\RayTracer\Source.cpp(23,15): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+D:\CPP\RayTracer\RayTracer\Source.cpp(23,64): warning C4305: “参数”: 从“double”到“float”截断
+D:\CPP\RayTracer\RayTracer\Source.cpp(23,43): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+D:\CPP\RayTracer\RayTracer\Source.cpp(31,33): warning C4305: “初始化”: 从“double”到“float”截断
+D:\CPP\RayTracer\RayTracer\Source.cpp(58,13): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+D:\CPP\RayTracer\RayTracer\Source.cpp(59,13): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
