@@ -14,8 +14,8 @@ public:
 			auto t0 = fmin((_min[a] - r.A[a]) / r.B[a], (_max[a] - r.A[a]) / r.B[a]);
 			auto t1 = fmax((_min[a] - r.A[a]) / r.B[a], (_max[a] - r.A[a]) / r.B[a]);
 
-			tmin = max(t0, tmin);
-			tmax = min(t1, tmax);
+			tmin = fmax(t0, tmin);
+			tmax = fmin(t1, tmax);
 			if (tmin > tmax)return false;
 		}
 		return true;

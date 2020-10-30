@@ -1,4 +1,5 @@
 #include <iostream>
+#include "time.h"
 #include"rtweekend.h"
 #include"hitable_list.h"
 #include "sphere.h"
@@ -7,7 +8,8 @@
 #include"color.h"
 #include "material.h"
 #include "moving_sphere.h"
-color ray_color(ray& r,const hitable& world,int depth){
+#include "bvh.h"
+color ray_color(ray& r,const hitable& world,int depth){ 
 	hit_record rec;
 	if (depth <= 0)return color(0.0, 0.0, 0.0);
 	if (world.hit(r,0.001,infinity,rec)){
@@ -28,7 +30,7 @@ color ray_color(ray& r,const hitable& world,int depth){
 }
 hitable_list random_scene() {
 	hitable_list world;
-	auto checker = make_shared<lambertian>(color(0.2, 0.3, 0.1), color(0.9, 0.9, 0.9));
+	auto checker = make_shared<checker_texture>(color(0.2, 0.3, 0.1), color(0.9, 0.9, 0.9));
 	auto ground_material = make_shared<lambertian>(checker);
 	world.add(make_shared<sphere>(points3(0, -1000, 0), 1000, ground_material));
 
@@ -47,7 +49,7 @@ hitable_list random_scene() {
 					points3 center2 = center + vec3(0, random_double(0.0, 0.5), 0.0);
 					world.add(make_shared<moving_sphere>(center,center2,0.0,1.0, 0.2, sphere_material));
 				}
-				else if (choose_mat < 0.95) {
+				 else if (choose_mat < 0.95) {
 					// metal
 					auto albedo = vec3(random_double(0.5, 1), random_double(0.5, 1), random_double(0.5, 1));
 					auto fuzz = random_double(0, 0.5);
@@ -72,16 +74,17 @@ hitable_list random_scene() {
 	auto material3 = make_shared<metal>(color(0.7, 0.6, 0.5), 0.0);
 	world.add(make_shared<sphere>(points3(4, 1, 0), 1.0, material3));
 
-	return world;
+	//return world;
+	return hitable_list(make_shared<bvh_node>(world, 0.0, 1.0));
 }
 
 int main(){
 
 	//image
 	float aspect_ratio = 16.0 / 9.0;
-	const int image_width = 400;
+	const int image_width = 800;
 	const int image_height =static_cast<int> (image_width/aspect_ratio);
-	const int samples_per_pixel = 50;
+	const int samples_per_pixel = 100;
 	const int max_depth = 50;
 
 	//world
@@ -137,4 +140,7 @@ int main(){
 		}
 	}
 	std::cerr << "\nDone.\n";
+	double finishtime = (double)(clock()/CLOCKS_PER_SEC);
+	std::cerr << "RunTime:" << finishtime << std::endl;
+
 }

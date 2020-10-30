@@ -10,38 +10,38 @@ class bvh_node:public hitable{
 
 public:
 	bvh_node(){};
-	bvh_node(const hitable_list& list,double t0,double t1);
+	bvh_node(const hitable_list& list, double t0, double t1):bvh_node(list.objects, 0, list.objects.size(), t0, t1)
+	{};
 	bvh_node(std::vector<shared_ptr<hitable>> objects, size_t start, size_t end, double t0, double t1);
 	virtual bool hit(const ray& r, float t_min, float t_max, hit_record& rec)const override;
 	virtual bool bounding_box(double t0, double t1, aabb& out_box)const override;
 
-	shared_ptr<bvh_node>left;
-	shared_ptr<bvh_node>right;
+	shared_ptr<hitable>left;
+	shared_ptr<hitable>right;
 	
-	inline bool box_compare(const shared_ptr<hitable> a,const shared_ptr<hitable> b,int axis){
-		aabb box_a;
-		aabb box_b;
-		if (!a->bounding_box(0.0,0.0,box_a) || !b->bounding_box(0.0,0.0,box_b)){
-			std::cerr << "No bounding box in bvh_node constructor!\n";
-		}
-		return box_a.min().e[axis] < box_b.min().e[axis];
-
-	}
-	bool box_x_compare(const shared_ptr<hitable> a, const shared_ptr<hitable> b){return box_compare(a, b, 0);}
-	bool box_y_compare(const shared_ptr<hitable> a, const shared_ptr<hitable> b){ return box_compare(a, b, 1); }
-	bool box_z_compare(const shared_ptr<hitable> a, const shared_ptr<hitable> b){ return box_compare(a, b, 2); }
 
 
 
 	aabb box;
 
 };
+inline bool box_compare(const shared_ptr<hitable> a, const shared_ptr<hitable> b, int axis){
+	aabb box_a;
+	aabb box_b;
+	if (!a->bounding_box(0.0, 0.0, box_a) || !b->bounding_box(0.0, 0.0, box_b)){
+		std::cerr << "No bounding box in bvh_node constructor!\n";
+	}
+	return box_a.min().e[axis] < box_b.min().e[axis];
 
+}
+bool box_x_compare(const shared_ptr<hitable> a, const shared_ptr<hitable> b){ return box_compare(a, b, 0); }
+bool box_y_compare(const shared_ptr<hitable> a, const shared_ptr<hitable> b){ return box_compare(a, b, 1); }
+bool box_z_compare(const shared_ptr<hitable> a, const shared_ptr<hitable> b){ return box_compare(a, b, 2); }
 bvh_node::bvh_node(std::vector<shared_ptr<hitable>>objects,size_t start,size_t end,double time0,double time1){
 	int axis = random_int(0, 2);
-	auto mycomparator = (axis == 0) ? box_x_compare :
-						(axis == 1) ? box_y_compare :
-							box_z_compare;
+	auto mycomparator = (axis == 0) ? box_x_compare
+		: (axis == 1) ? box_y_compare
+		: box_z_compare;
 	size_t object_span = end-start;
 	if (object_span == 1){
 		left = right = objects[start];
@@ -93,5 +93,6 @@ bool bvh_node::bounding_box(double t0, double t1, aabb& out_box)const{
 	out_box = box;
 	return true;
 }
+
 
 #endif
