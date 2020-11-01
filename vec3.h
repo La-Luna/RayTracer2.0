@@ -3,6 +3,8 @@
 #include<math.h>
 #include<iostream>
 #include "rtweekend.h"
+
+double random_double(double min, double max);
 class vec3{
 public:
 	vec3(){};
@@ -24,6 +26,22 @@ public:
 	inline vec3& operator +=(const vec3& temp);
 	vec3 operator -()const{ return vec3(-e[0], -e[1], -e[2]); }
 
+	inline double x()const{
+		return e[0];
+	}
+	inline double y()const{
+		return e[1];
+	}
+	inline double z()const{
+		return e[2];
+	}
+
+
+
+public:
+	inline static vec3 random(double a, double b){
+		return vec3(random_double(a, b), random_double(a, b), random_double(a, b));
+	}
 
 	float e[3];
 };
