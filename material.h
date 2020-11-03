@@ -44,6 +44,7 @@ double schlick(double cos_theta, double ref_idx){
 class material{
 public:
 	virtual bool scatter( ray& r_in, hit_record& rec, vec3& attenuation, ray& scattered)const=0;
+	virtual color emitted(double u, double v, const points3& p)const{ return color(0, 0, 0); }
 };
 
 class lambertian :public material{
@@ -110,6 +111,21 @@ public:
 
 
 		double ref_idex;
+};
+
+
+class diffuse_light :public material{
+public:
+	diffuse_light(shared_ptr<texture> e):emit(e){};
+	diffuse_light(color c){ emit = make_shared<solid_color>(c); }
+	virtual bool scatter(ray& r_in, hit_record& rec, vec3& attenuation, ray& scattered)const override{ return false; }
+	virtual color emitted(double u, double v, const points3& p)const{
+		return emit->value(u, v, p);
+	}
+
+
+public:
+	shared_ptr<texture> emit;
 };
 
 #endif

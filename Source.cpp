@@ -10,23 +10,26 @@
 #include "moving_sphere.h"
 #include "bvh.h"
 #include "perlin.h"
-
-color ray_color(ray& r,const hitable& world,int depth){ 
+#include"aarect.h"
+color ray_color(ray& r,const color& background,const hitable& world,int depth){ 
 	hit_record rec;
 	if (depth <= 0)return color(0.0, 0.0, 0.0);
+
 	if (world.hit(r,0.001,infinity,rec)){
 		//return color(1.0, 0.0, 0.0);
 
 		ray scattered;
 		color attenuation;
+		color emitted = rec.mat_ptr->emitted(rec.u, rec.v, rec.p);
 		if (rec.mat_ptr->scatter(r, rec, attenuation, scattered))
-			return attenuation*ray_color(scattered, world, depth - 1);
-		return vec3(0.0, 0.0, 0.0);
+			return emitted+attenuation*ray_color(scattered,background ,world, depth - 1);
+		else return emitted;
 	}
 	else{
-		vec3 unit_dir = unit_vector(r.direction());
-		auto t = 0.5*(unit_dir.e[1] + 1.0);
-		return (1.0 - t)*color(1.0, 1.0, 1.0) + t*color(0.5, 0.7, 1.0);
+		//vec3 unit_dir = unit_vector(r.direction());
+		//auto t = 0.5*(unit_dir.e[1] + 1.0);
+		//return (1.0 - t)*color(1.0, 1.0, 1.0) + t*color(0.5, 0.7, 1.0);
+		return background;
 	}
 
 }
@@ -55,6 +58,37 @@ hitable_list earth(){
 	return hitable_list(globe);
 
 }
+hitable_list simple_light(){
+	hitable_list ans;
+	shared_ptr<noise_texture> pertext = make_shared<noise_texture>(4.0);
+	ans.add(make_shared<sphere>(points3(0.0, -1000.0, 0.0), 1000.0, make_shared<lambertian>(pertext)));
+	ans.add(make_shared<sphere>(points3(0.0, 2.0, 0.0), 2, make_shared<lambertian>(pertext)));
+
+	auto difflighttex = make_shared<diffuse_light>(color(4.0, 4.0, 4.0));
+	ans.add(make_shared<xy_rect>(3, 5, 1, 3, -2, difflighttex));
+
+
+	return ans;
+
+}
+hitable_list cornell_box(){
+	auto red = make_shared<lambertian>(color(.65, .05, .05));
+	auto green = make_shared<lambertian>(color(.73, .73, .73));
+	auto white = make_shared<lambertian>(color(.12, .45, .15));
+	auto light = make_shared<diffuse_light>(color(15.0, 15.0, 15.0));
+
+	hitable_list objects;
+	objects.add(make_shared<yz_rect>(0, 555, 0, 555, 555, green));
+	objects.add(make_shared<yz_rect>(0, 555, 0, 555, 0, red));
+	objects.add(make_shared<xz_rect>(213, 343, 227, 332, 554, light));
+	objects.add(make_shared<xz_rect>(0, 555, 0, 555, 0, white));
+	objects.add(make_shared<xz_rect>(0, 555, 0, 555, 555, white));
+	objects.add(make_shared<xy_rect>(0, 555, 0, 555, 555, white));
+	return objects;
+
+}
+
+
 hitable_list random_scene() {
 	hitable_list world;
 	auto checker = make_shared<checker_texture>(color(0.2, 0.3, 0.1), color(0.9, 0.9, 0.9));
@@ -109,9 +143,9 @@ int main(){
 
 	//image
 	float aspect_ratio = 16.0 / 9.0;
-	const int image_width = 900;
-	const int image_height =static_cast<int> (image_width/aspect_ratio);
-	const int samples_per_pixel = 150;
+	int image_width = 900;
+	int image_height = static_cast<int> (image_width / aspect_ratio);
+	int samples_per_pixel = 150;
 	const int max_depth = 50;
 
 	//world
@@ -142,11 +176,12 @@ int main(){
 	points3 lookat;
 	auto vfov=40.0;
 	double aperture=0.0;
+	color background = color(0.0, 0.0, 0.0);
 
-
-	switch(4){
+	switch(6){
 	case 1:{
 	world = random_scene();
+	background = color(0.70, 0.80, 1.00);
 	lookfrom=points3(13.0, 2.0, 3.0);
 	lookat=points3(0.0, 0.0, 0.0);
 	aperture = 0.1;
@@ -155,6 +190,7 @@ int main(){
 	}
 	case 2:{
 		world = two_spheres();
+		background = color(0.70, 0.80, 1.00);
 		lookfrom = points3(13.0, 2.0, 3.0);
 		lookat = points3(0.0, 0.0, 0.0);
 		vfov = 20.0;
@@ -162,6 +198,7 @@ int main(){
 	}
 	case 3:{
 		world = two_perlin_spheres();
+		background = color(0.70, 0.80, 1.00);
 		lookfrom = points3(13.0, 2.0, 3.0);
 		lookat = points3(0.0, 0.0, 0.0);
 		vfov = 20.0;
@@ -169,9 +206,33 @@ int main(){
 	}
 	case 4:{
 		world = earth();
+		background = color(0.70, 0.80, 1.00);
 		lookfrom = points3(13.0, 2.0, 3.0);
 		lookat = points3(0.0, 0.0, 0.0);
 		vfov = 20.0;
+		break;
+	}
+	case 5:{
+		world = simple_light();
+		background = color(0.0, 0.0, 0.0);
+		samples_per_pixel = 400;
+		lookfrom = vec3(26.0, 3.0, 6.0);
+		lookat = vec3(0.0, 2.0, 0.0);
+		vfov = 20.0;
+		break;
+	
+		
+	}
+	case 6:{
+		world = cornell_box();
+		aspect_ratio = 1.0;
+		image_width = 600;
+		image_height = static_cast<int> (image_width / aspect_ratio);
+		samples_per_pixel = 200;
+		background = color(0.0, 0.0, 0.0);
+		lookfrom = vec3(278.0, 278.0, -800.0);
+		lookat = vec3(278.0, 278.0, 0.0);
+		vfov = 40.0;
 		break;
 	}
 
@@ -202,7 +263,7 @@ int main(){
 				float v = (j +random_double()) / float(image_height - 1);
 				//std::cout << u << " " << v << std::endl;
 				ray r = cam.get_ray(u, v);
-				pixel_c += ray_color(r, world,max_depth);
+				pixel_c += ray_color(r,background, world,max_depth);
 			}
 			write_color(std::cout, pixel_c,samples_per_pixel);
 

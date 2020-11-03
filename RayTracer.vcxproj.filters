@@ -60,6 +60,9 @@
     <ClInclude Include="rtw_stb_image.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="aarect.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
