@@ -11,6 +11,8 @@
 #include "bvh.h"
 #include "perlin.h"
 #include"aarect.h"
+#include"mybox.h"
+
 color ray_color(ray& r,const color& background,const hitable& world,int depth){ 
 	hit_record rec;
 	if (depth <= 0)return color(0.0, 0.0, 0.0);
@@ -84,6 +86,11 @@ hitable_list cornell_box(){
 	objects.add(make_shared<xz_rect>(0, 555, 0, 555, 0, white));
 	objects.add(make_shared<xz_rect>(0, 555, 0, 555, 555, white));
 	objects.add(make_shared<xy_rect>(0, 555, 0, 555, 555, white));
+
+
+	objects.add(make_shared<box>(points3(130.0,0.0,65.0), points3(295.0,165.0,230.0), white));
+	objects.add(make_shared<box>(points3(130.0, 0.0, 65.0), points3(295.0, 165.0, 230.0), red));
+
 	return objects;
 
 }
