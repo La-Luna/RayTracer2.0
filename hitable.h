@@ -32,5 +32,35 @@ public:
 
 };
 
+
+
+class translate:public hitable{
+public:
+	translate(){};
+	translate(shared_ptr<hitable> p, const vec3& off){
+		ptr = p;
+		off = offset;
+	}
+	virtual bool hit(const ray& r, float t_min, float t_max, hit_record& rec)const override;
+	virtual bool bounding_box(double t0, double t1, aabb& out_box)const override;
+
+public:
+	shared_ptr<hitable> ptr;
+	vec3 offset;
+
+};
+
+bool translate::hit(const ray& r, float t_min, float t_max, hit_record& rec)const{
+	ray moved_r(r.origin() - offset, r.direction(), r.time());
+	if (!ptr->hit(r, t_min, t_max, rec))return false;
+	rec.p += offset;
+	rec.set_face_normal(moved_r, rec.normal);
+}
+
+bool translate::bounding_box(double t0, double t1, aabb& out_box)const{
+	if (!ptr->bounding_box(t0, t1, out_box))return false;
+	out_box = aabb(out_box.min() + offset, out_box.max() + offset);
+	return true;
+}
 #endif
 
