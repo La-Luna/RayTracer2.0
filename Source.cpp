@@ -12,6 +12,7 @@
 #include "perlin.h"
 #include"aarect.h"
 #include"mybox.h"
+#include "constant_medium.h"
 
 color ray_color(ray& r,const color& background,const hitable& world,int depth){ 
 	hit_record rec;
@@ -87,9 +88,18 @@ hitable_list cornell_box(){
 	objects.add(make_shared<xz_rect>(0, 555, 0, 555, 555, white));
 	objects.add(make_shared<xy_rect>(0, 555, 0, 555, 555, white));
 
+	shared_ptr<hitable> box1 = make_shared<box>(points3(0.0, 0.0, 0.0), points3(165.0, 330.0, 165.0), white);
+	box1 = make_shared<rotate_y>(box1, 15);
+	box1 = make_shared<translate>(box1, vec3(265.0, 0.0, 295.0));
+	box1 = make_shared<constant_medium>(box1, 0.01, vec3(0.0, 0.0, 0.0));
+	objects.add(box1);
+	shared_ptr<hitable> box2 = make_shared<box>(points3(0.0, 0.0, 0.0), points3(165.0, 165.0, 165.0), red);
+	box2 = make_shared<rotate_y>(box2, -18);
+	box2 = make_shared<translate>(box2, vec3(130.0, 0.0, 65.0));
+	box2 = make_shared<constant_medium>(box2, 0.01, vec3(1.0, 1.0, 1.0));
+	objects.add(box2);
 
-	objects.add(make_shared<box>(points3(130.0,0.0,65.0), points3(295.0,165.0,230.0), white));
-	objects.add(make_shared<box>(points3(130.0, 0.0, 65.0), points3(295.0, 165.0, 230.0), red));
+	
 
 	return objects;
 
@@ -145,14 +155,76 @@ hitable_list random_scene() {
 	//return world;
 	return hitable_list(make_shared<bvh_node>(world, 0.0, 1.0));
 }
+hitable_list final_scene() {
+	hitable_list boxes1;
+	auto ground = make_shared<lambertian>(color(0.48, 0.83, 0.53));
 
+	const int boxes_per_side = 20;
+	for (int i = 0; i < boxes_per_side; i++) {
+		for (int j = 0; j < boxes_per_side; j++) {
+			auto w = 100.0;
+			auto x0 = -1000.0 + i*w;
+			auto z0 = -1000.0 + j*w;
+			auto y0 = 0.0;
+			auto x1 = x0 + w;
+			auto y1 = random_double(1, 101);
+			auto z1 = z0 + w;
+
+			boxes1.add(make_shared<box>(points3(x0, y0, z0), points3(x1, y1, z1), ground));
+		}
+	}
+
+	hitable_list objects;
+
+	objects.add(make_shared<bvh_node>(boxes1, 0, 1));
+
+	auto light = make_shared<diffuse_light>(color(7, 7, 7));
+	objects.add(make_shared<xz_rect>(123, 423, 147, 412, 554, light));
+
+	auto center1 = points3(400, 400, 200);
+	auto center2 = center1 + vec3(30, 0, 0);
+	auto moving_sphere_material = make_shared<lambertian>(color(0.7, 0.3, 0.1));
+	objects.add(make_shared<moving_sphere>(center1, center2, 0, 1, 50, moving_sphere_material));
+
+	objects.add(make_shared<sphere>(points3(260, 150, 45), 50, make_shared<dieletric>(1.5)));
+	objects.add(make_shared<sphere>(
+		points3(0, 150, 145), 50, make_shared<metal>(color(0.8, 0.8, 0.9), 10.0)
+		));
+
+	auto boundary = make_shared<sphere>(points3(360, 150, 145), 70, make_shared<dieletric>(1.5));
+	objects.add(boundary);
+	objects.add(make_shared<constant_medium>(boundary, 0.2, color(0.2, 0.4, 0.9)));
+	boundary = make_shared<sphere>(points3(0, 0, 0), 5000, make_shared<dieletric>(1.5));
+	objects.add(make_shared<constant_medium>(boundary, .0001, color(1, 1, 1)));
+
+	auto emat = make_shared<lambertian>(make_shared<image_texture>("earthmap.jpg"));
+	objects.add(make_shared<sphere>(points3(400, 200, 400), 100, emat));
+	auto pertext = make_shared<noise_texture>(0.1);
+	objects.add(make_shared<sphere>(points3(220, 280, 300), 80, make_shared<lambertian>(pertext)));
+
+	hitable_list boxes2;
+	auto white = make_shared<lambertian>(color(.73, .73, .73));
+	int ns = 1000;
+	for (int j = 0; j < ns; j++) {
+		boxes2.add(make_shared<sphere>(points3::random(0, 165), 10, white));
+	}
+
+	objects.add(make_shared<translate>(
+		make_shared<rotate_y>(
+		make_shared<bvh_node>(boxes2, 0.0, 1.0), 15),
+		vec3(-100, 270, 395)
+		)
+		);
+
+	return objects;
+}
 int main(){
 
 	//image
 	float aspect_ratio = 16.0 / 9.0;
-	int image_width = 900;
+	int image_width = 400;
 	int image_height = static_cast<int> (image_width / aspect_ratio);
-	int samples_per_pixel = 150;
+	int samples_per_pixel = 15;
 	const int max_depth = 50;
 
 	//world

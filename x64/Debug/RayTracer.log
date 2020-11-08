@@ -1,15 +1,26 @@
-﻿生成启动时间为 2020/11/2 22:07:35。
+﻿生成启动时间为 2020/11/8 20:58:45。
      1>项目“D:\CPP\RayTracer\RayTracer\RayTracer.vcxproj”在节点 2 上(Build 个目标)。
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /Zi /nologo /W3 /WX- /sdl /Od /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Debug\\" /Fd"x64\Debug\vc120.pdb" /Gd /TP /errorReport:prompt Source.cpp
          Source.cpp
-     1>d:\cpp\raytracer\raytracer\vec3.h(43): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
-     1>d:\cpp\raytracer\raytracer\vec3.h(92): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
-     1>d:\cpp\raytracer\raytracer\vec3.h(93): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
-     1>d:\cpp\raytracer\raytracer\vec3.h(104): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+     1>d:\cpp\raytracer\raytracer\vec3.h(51): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+     1>d:\cpp\raytracer\raytracer\vec3.h(100): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+     1>d:\cpp\raytracer\raytracer\vec3.h(101): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+     1>d:\cpp\raytracer\raytracer\vec3.h(112): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
      1>d:\cpp\raytracer\raytracer\rtweekend.h(47): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
      1>d:\cpp\raytracer\raytracer\rtweekend.h(54): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
      1>d:\cpp\raytracer\raytracer\rtweekend.h(64): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+     1>d:\cpp\raytracer\raytracer\hitable.h(86): warning C4244: “参数”: 从“const double”转换到“float”，可能丢失数据
+     1>d:\cpp\raytracer\raytracer\hitable.h(87): warning C4244: “参数”: 从“const double”转换到“float”，可能丢失数据
+     1>d:\cpp\raytracer\raytracer\hitable.h(99): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+     1>d:\cpp\raytracer\raytracer\hitable.h(115): warning C4244: “=”: 从“const double”转换到“float”，可能丢失数据
+     1>d:\cpp\raytracer\raytracer\hitable.h(116): warning C4244: “=”: 从“const double”转换到“float”，可能丢失数据
+     1>d:\cpp\raytracer\raytracer\hitable.h(118): warning C4244: “=”: 从“const double”转换到“float”，可能丢失数据
+     1>d:\cpp\raytracer\raytracer\hitable.h(119): warning C4244: “=”: 从“const double”转换到“float”，可能丢失数据
+     1>d:\cpp\raytracer\raytracer\hitable.h(129): warning C4244: “=”: 从“const double”转换到“float”，可能丢失数据
+     1>d:\cpp\raytracer\raytracer\hitable.h(130): warning C4244: “=”: 从“const double”转换到“float”，可能丢失数据
+     1>d:\cpp\raytracer\raytracer\hitable.h(132): warning C4244: “=”: 从“const double”转换到“float”，可能丢失数据
+     1>d:\cpp\raytracer\raytracer\hitable.h(133): warning C4244: “=”: 从“const double”转换到“float”，可能丢失数据
      1>d:\cpp\raytracer\raytracer\hitable_list.h(30): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
      1>d:\cpp\raytracer\raytracer\perlin.h(45): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
      1>d:\cpp\raytracer\raytracer\perlin.h(75): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
@@ -33,25 +44,32 @@
      1>d:\cpp\raytracer\raytracer\bvh.h(84): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
      1>d:\cpp\raytracer\raytracer\aarect.h(21): warning C4244: “参数”: 从“const double”转换到“float”，可能丢失数据
      1>d:\cpp\raytracer\raytracer\aarect.h(46): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
-     1>Source.cpp(18): warning C4244: “参数”: 从“const double”转换到“float”，可能丢失数据
-     1>Source.cpp(18): warning C4305: “参数”: 从“double”到“float”截断
-     1>Source.cpp(38): warning C4305: “参数”: 从“double”到“float”截断
+     1>d:\cpp\raytracer\raytracer\aarect.h(63): warning C4244: “参数”: 从“const double”转换到“float”，可能丢失数据
+     1>d:\cpp\raytracer\raytracer\aarect.h(82): warning C4244: “参数”: 从“const double”转换到“float”，可能丢失数据
+     1>d:\cpp\raytracer\raytracer\aarect.h(104): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+     1>d:\cpp\raytracer\raytracer\aarect.h(122): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+     1>Source.cpp(20): warning C4244: “参数”: 从“const double”转换到“float”，可能丢失数据
+     1>Source.cpp(20): warning C4305: “参数”: 从“double”到“float”截断
+     1>Source.cpp(40): warning C4305: “参数”: 从“double”到“float”截断
      1>Source.cpp(77): warning C4305: “参数”: 从“double”到“float”截断
-     1>Source.cpp(84): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
-     1>Source.cpp(84): warning C4305: “参数”: 从“double”到“float”截断
-     1>Source.cpp(86): warning C4305: “参数”: 从“double”到“float”截断
-     1>Source.cpp(91): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
-     1>Source.cpp(93): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
-     1>Source.cpp(98): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+     1>Source.cpp(78): warning C4305: “参数”: 从“double”到“float”截断
+     1>Source.cpp(79): warning C4305: “参数”: 从“double”到“float”截断
+     1>Source.cpp(106): warning C4305: “参数”: 从“double”到“float”截断
+     1>Source.cpp(113): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+     1>Source.cpp(113): warning C4305: “参数”: 从“double”到“float”截断
      1>Source.cpp(115): warning C4305: “参数”: 从“double”到“float”截断
-     1>Source.cpp(118): warning C4305: “参数”: 从“double”到“float”截断
-     1>Source.cpp(128): warning C4305: “初始化”: 从“double”到“float”截断
-     1>Source.cpp(167): warning C4305: “参数”: 从“double”到“float”截断
-     1>Source.cpp(176): warning C4305: “参数”: 从“double”到“float”截断
-     1>Source.cpp(184): warning C4305: “参数”: 从“double”到“float”截断
-     1>Source.cpp(192): warning C4305: “参数”: 从“double”到“float”截断
-     1>Source.cpp(233): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
-     1>Source.cpp(234): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+     1>Source.cpp(120): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+     1>Source.cpp(122): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+     1>Source.cpp(127): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+     1>Source.cpp(144): warning C4305: “参数”: 从“double”到“float”截断
+     1>Source.cpp(147): warning C4305: “参数”: 从“double”到“float”截断
+     1>Source.cpp(157): warning C4305: “初始化”: 从“double”到“float”截断
+     1>Source.cpp(196): warning C4305: “参数”: 从“double”到“float”截断
+     1>Source.cpp(205): warning C4305: “参数”: 从“double”到“float”截断
+     1>Source.cpp(213): warning C4305: “参数”: 从“double”到“float”截断
+     1>Source.cpp(221): warning C4305: “参数”: 从“double”到“float”截断
+     1>Source.cpp(274): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+     1>Source.cpp(275): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
      1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\memory(932): warning C4244: “参数”: 从“int”转换到“float”，可能丢失数据
                  C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\memory(1003): 参见对正在编译的函数 模板 实例化“std::_Ref_count_obj<_Ty>::_Ref_count_obj<vec3,int,std::shared_ptr<lambertian>>(vec3 &&,int &&,std::shared_ptr<lambertian> &&)”的引用
                  with
@@ -63,7 +81,7 @@
                  [
                      _Ty=sphere
                  ]
-                 Source.cpp(39): 参见对正在编译的函数 模板 实例化“std::shared_ptr<sphere> std::make_shared<sphere,vec3,int,std::shared_ptr<lambertian>>(vec3 &&,int &&,std::shared_ptr<lambertian> &&)”的引用
+                 Source.cpp(41): 参见对正在编译的函数 模板 实例化“std::shared_ptr<sphere> std::make_shared<sphere,vec3,int,std::shared_ptr<lambertian>>(vec3 &&,int &&,std::shared_ptr<lambertian> &&)”的引用
      1>C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\memory(932): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
                  C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\memory(1003): 参见对正在编译的函数 模板 实例化“std::_Ref_count_obj<_Ty>::_Ref_count_obj<vec3,double,std::shared_ptr<lambertian>>(vec3 &&,double &&,std::shared_ptr<lambertian> &&)”的引用
                  with
@@ -75,8 +93,9 @@
                  [
                      _Ty=sphere
                  ]
-                 Source.cpp(47): 参见对正在编译的函数 模板 实例化“std::shared_ptr<sphere> std::make_shared<sphere,vec3,double,std::shared_ptr<lambertian>>(vec3 &&,double &&,std::shared_ptr<lambertian> &&)”的引用
-     1>d:\cpp\raytracer\raytracer\vec3.h(64): warning C4715: “operator/”: 不是所有的控件路径都返回值
+                 Source.cpp(49): 参见对正在编译的函数 模板 实例化“std::shared_ptr<sphere> std::make_shared<sphere,vec3,double,std::shared_ptr<lambertian>>(vec3 &&,double &&,std::shared_ptr<lambertian> &&)”的引用
+     1>d:\cpp\raytracer\raytracer\hitable.h(58): warning C4715: “translate::hit”: 不是所有的控件路径都返回值
+     1>d:\cpp\raytracer\raytracer\vec3.h(72): warning C4715: “operator/”: 不是所有的控件路径都返回值
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"D:\CPP\RayTracer\x64\Debug\RayTracer.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\CPP\RayTracer\x64\Debug\RayTracer.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\CPP\RayTracer\x64\Debug\RayTracer.lib" /MACHINE:X64 x64\Debug\Source.obj
          RayTracer.vcxproj -> D:\CPP\RayTracer\x64\Debug\RayTracer.exe
@@ -84,4 +103,4 @@
 
 生成成功。
 
-已用时间 00:00:01.51
+已用时间 00:00:01.45

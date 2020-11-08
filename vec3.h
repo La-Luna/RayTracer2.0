@@ -8,12 +8,20 @@ double random_double(double min, double max);
 class vec3{
 public:
 	vec3(){};
+	vec3(const vec3& temp){
+		e[0] = temp.e[0];
+		e[1] = temp.e[1];
+		e[2] = temp.e[2];
+	}
 	vec3(float a, float b, float c){
 		e[0] = a;
 		e[1] = b;
 		e[2] = c;
 	}
 	inline float operator [](int i)const{
+		return e[i];
+	}
+	inline float& operator[](int i){
 		return e[i];
 	}
 	inline float length()const{

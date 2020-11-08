@@ -14,7 +14,7 @@ public:
 	vec3 point_at_parameter(float t) const{
 		return A + t*B;
 	}
-	double time(){ return tm; }
+	double time()const{ return tm; }
 
 
 	vec3 A;
